@@ -4,5 +4,7 @@
     <string name="app_name">BTCM</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title">BTC Price:</string>
+    <string name="pirceUnit_RMB">RMB</string>
 
 </resources>
