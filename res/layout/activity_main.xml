@@ -14,6 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="30sp"
+        android:layout_margin="10dp"
         android:text="@string/title" />
     
     <LinearLayout
@@ -25,13 +26,16 @@
         android:id="@+id/priceView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="60sp" />
+        android:textSize="60sp" 
+        android:layout_margin="10dp" 
+        android:text="@string/initial_price" />
         
         <TextView
         android:id="@+id/priceUnitView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
+        android:layout_margin="10dp"
         android:text="@string/pirceUnit_RMB" />
         
         

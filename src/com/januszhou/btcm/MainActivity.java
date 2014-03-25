@@ -1,64 +1,68 @@
 package com.januszhou.btcm;
 
-import com.januszhou.btcm.HttpRequest;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 
 public class MainActivity extends Activity {
 	
 	public static final String TAG = "MainActivity";
-	private static final String url = "https://market.huobi.com/staticmarket/td.html";
-	private String price;
+	public static final String NEW_PRICE_EXTRA = "new_price_extra";
 	private TextView textView;
+	BtcmApplication bApplication;
+	MsgReceiver msgReceiver;
+	IntentFilter intentFilter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		this.price = "0";
-		textView = (TextView) findViewById(R.id.priceView);
-		new BtcPrice().execute();		
+		textView = (TextView) findViewById(R.id.priceView);	
+		bApplication = (BtcmApplication) this.getApplication();
+		
+		msgReceiver = new MsgReceiver();  
+        intentFilter = new IntentFilter();  
+        intentFilter.addAction("com.januszhou.btcm.MSG_NEW_PRICE");
+        
+		startService(new Intent(this, UpdateService.class));
 	}
 	
-	class BtcPrice extends AsyncTask<String, Integer, String> {
-		
-		//Called to initiate the background activity
-		@Override
-		protected String doInBackground(String... statuses) {
-			try{
-				String s=HttpRequest.sendGet(url, "");
-		        String tags=",";
-		        String [] re = s.split(tags);
-		        price = re[re.length-3]; 
-		        return price;
-			}catch (Exception e){
-				Log.e(TAG, e.toString());
-				e.printStackTrace();
-				return "Failed to GET";
-			}
-		}
-		 
-		// Called when there's a status to be updated
-	    @Override
-	    protected void onProgressUpdate(Integer... values) { // 
-	    	
-	    	super.onProgressUpdate(values);
-	      // Not used in this case
-	    }
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		//register service
+		registerReceiver(msgReceiver, intentFilter);  
+	}
+	
+	
 
-	    // Called once the background activity has completed
-	    @Override
-	    protected void onPostExecute(String result) { // 
-
-	    	Toast.makeText(MainActivity.this, result, Toast.LENGTH_LONG).show();
-	    	textView.setText(price);
-	    }
-
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		stopService(new Intent(this, UpdateService.class));
+		unregisterReceiver(msgReceiver);  
 	}
 
+
+
+	class MsgReceiver extends BroadcastReceiver {
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			// TODO Auto-generated method stub
+			textView.setText(intent.getStringExtra(NEW_PRICE_EXTRA));
+			Log.d("MsgReceiver", "onReceived");
+		}
+		
+	}
+	
 
 }
