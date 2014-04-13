@@ -75,14 +75,15 @@ public class UpdateService extends Service{
 			// TODO Auto-generated method stub
 			super.run();
 			UpdateService updateService = UpdateService.this;
+			BtcmApplication bApplication = (BtcmApplication) updateService.getApplication();
 			while(updateService.runFlag){
 				Log.d(TAG, "Updater running");
 				try{
-					//some work goes here...
-					BtcmApplication bApplication = (BtcmApplication) updateService.getApplication();
-					String price = bApplication.getBtcPrice_huobi();
+					//some work goes here...					
+					bApplication.updateMarketData();
 					intent = new Intent("com.januszhou.btcm.MSG_NEW_PRICE");
-					intent.putExtra(NEW_PRICE_EXTRA, price);
+					//intent.putExtra(NEW_PRICE_EXTRA, price);
+					intent.putExtra(NEW_PRICE_EXTRA,"");
 					updateService.sendBroadcast(intent);
 					Thread.sleep(DELAY);
 				}catch(InterruptedException e){

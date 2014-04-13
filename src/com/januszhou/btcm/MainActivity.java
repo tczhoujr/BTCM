@@ -13,7 +13,9 @@ public class MainActivity extends Activity {
 	
 	public static final String TAG = "MainActivity";
 	public static final String NEW_PRICE_EXTRA = "new_price_extra";
-	private TextView textView;
+	private TextView huobiLastPrice;
+	private TextView okcoinLastPrice;
+	private TextView bitstampLastPrice;
 	BtcmApplication bApplication;
 	MsgReceiver msgReceiver;
 	IntentFilter intentFilter;
@@ -22,7 +24,9 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		textView = (TextView) findViewById(R.id.priceView);	
+		huobiLastPrice = (TextView) findViewById(R.id.huobi_priceView);	
+		okcoinLastPrice = (TextView) findViewById(R.id.okcoin_priceView);
+		bitstampLastPrice = (TextView) findViewById(R.id.bitstamp_priceView);
 		bApplication = (BtcmApplication) this.getApplication();
 		
 		msgReceiver = new MsgReceiver();  
@@ -58,7 +62,10 @@ public class MainActivity extends Activity {
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			// TODO Auto-generated method stub
-			textView.setText(intent.getStringExtra(NEW_PRICE_EXTRA));
+			//textView.setText(intent.getStringExtra(NEW_PRICE_EXTRA));
+			huobiLastPrice.setText(bApplication.getMarketData().getHuobiMarket().getLastestPrice());
+			okcoinLastPrice.setText(bApplication.getMarketData().getOkcoinMarket().getLastestPrice());
+			bitstampLastPrice.setText(bApplication.getMarketData().getBitstampMarket().getLastestPrice());
 			Log.d("MsgReceiver", "onReceived");
 		}
 		
