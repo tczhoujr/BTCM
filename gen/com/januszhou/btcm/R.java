@@ -24,20 +24,27 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f08000a;
+        public static final int action_settings=0x7f08000f;
         public static final int bitstamp_priceUnitView=0x7f080003;
         public static final int bitstamp_priceView=0x7f080002;
         public static final int bitstamp_titleView=0x7f080001;
+        public static final int highPriceView=0x7f08000c;
         public static final int huobi_priceUnitView=0x7f080006;
         public static final int huobi_priceView=0x7f080005;
         public static final int huobi_titleView=0x7f080004;
+        public static final int listView=0x7f08000e;
+        public static final int lowPriceView=0x7f08000d;
         public static final int okcoin_priceUnitView=0x7f080009;
         public static final int okcoin_priceView=0x7f080008;
         public static final int okcoin_titleView=0x7f080007;
+        public static final int priceUnitView=0x7f08000b;
+        public static final int priceView=0x7f08000a;
         public static final int titleView=0x7f080000;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
+        public static final int list_item=0x7f030001;
+        public static final int list_layout=0x7f030002;
     }
     public static final class menu {
         public static final int main=0x7f070000;
@@ -78,6 +85,7 @@ public final class R {
          */
         public static final int AppBaseTheme=0x7f060000;
         /**  Application theme. 
+ "android:Theme.Black.NoTitleBar" 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f060001;

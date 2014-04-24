@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">BTCM</string>
+    <string name="app_name">BTC Market</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
-    <string name="title">Btcoin Market</string>
+    <string name="title">Bitcoin Market</string>
     <string name="huobi_title">HuoBi</string>
     <string name="okcoin_title">OKCoin</string>
     <string name="bitstamp_title">Bitstamp</string>

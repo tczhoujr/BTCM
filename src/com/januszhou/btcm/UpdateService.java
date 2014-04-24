@@ -44,8 +44,6 @@ public class UpdateService extends Service{
 		return super.onStartCommand(intent, flags, startId);
 	}
 
-	
-	
 
 	@Override
 	public void onDestroy() {
@@ -58,8 +56,6 @@ public class UpdateService extends Service{
 		
 		Log.d(TAG, "onDestroy");
 	}
-
-
 
 
 	public class Updater extends Thread{
