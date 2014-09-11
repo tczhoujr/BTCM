@@ -11,29 +11,31 @@ import com.januszhou.btcm.HttpRequest;
 public class Market {
 	
 	public static final String TAG = "Market";
-	private static final int MARKET_NUM = 3;
-	
 	public MarketData marketDataArray[];
 	
 	
 	public huobiMarket huobi;
 	public okcoinMarket okcoin;
 	public bitstampMarket bitstamp;
+	public btcChinaMarket btcc;
 	
 	public Market(){
 		huobi = new huobiMarket();
 		okcoin = new okcoinMarket();
 		bitstamp = new bitstampMarket();
-		marketDataArray = new MarketData[MARKET_NUM];
+		//btcc = new btcChinaMarket();
+		marketDataArray = new MarketData[BtcmApplication.MARKET_NUM];
 		marketDataArray[0] = bitstamp.getMarketData();
 		marketDataArray[1] = huobi.getMarketData();
 		marketDataArray[2] = okcoin.getMarketData();
+		//marketDataArray[3] = btcc.getMarketData();
 	}
 	
 	public void updateMarketData(){
 		huobi.updateMarketData();
 		okcoin.updateMarketData();
 		bitstamp.updateMarketData();
+		//btcc.updateMarketData();
 	}
 	
 	public MarketData[] getMarketDataArray() {
@@ -64,7 +66,7 @@ public class Market {
 		private MarketData huobiData;
 		
 		public huobiMarket(){
-			this.huobiData = new MarketData("HuoBi","RMB","_ _ _","_ _ _","_ _ _");
+			this.huobiData = new MarketData("HUOBI","RMB","_ _ _","_ _ _","_ _ _");
 		}
 		
 		public MarketData getMarketData(){
@@ -91,7 +93,7 @@ public class Market {
 		private MarketData okcoinData;
 		
 		public okcoinMarket(){
-			this.okcoinData = new MarketData("OKCoin","RMB","_ _ _","_ _ _","_ _ _");
+			this.okcoinData = new MarketData("OKCOIN","RMB","_ _ _","_ _ _","_ _ _");
 		}
 		
 		public MarketData getMarketData(){
@@ -129,7 +131,7 @@ public class Market {
 		private MarketData bitstampData;
 		
 		public bitstampMarket(){
-			this.bitstampData = new MarketData("Bitstamp","USD","_ _ _","_ _ _","_ _ _");
+			this.bitstampData = new MarketData("BITSTAMP","USD","_ _ _","_ _ _","_ _ _");
 		}
 		
 		public MarketData getMarketData(){
@@ -157,6 +159,44 @@ public class Market {
 				e.printStackTrace();
 			}
 			
+		} 
+	}
+	
+	public class btcChinaMarket{
+		private static final String BTCC_API_URL = "http://z.btc123.com/lib/TicInfo.js?type=btcchinaTicker";
+		private MarketData btccData;
+		
+		public btcChinaMarket(){
+			this.btccData = new MarketData("BTCCHINA","RMB","_ _ _","_ _ _","_ _ _");
+		}
+		
+		public MarketData getMarketData(){
+			return btccData;
+		}
+		
+		public void updateMarketData(){
+			try{
+				
+				String s=HttpRequest.sendGet(BTCC_API_URL, "");
+				JSONObject json;
+			    try {
+			    	json = new JSONObject(s);
+			        String result = json.getString("ticker");
+			        json = new JSONObject(result);
+			        btccData.lastestPrice = json.getString("last");
+			        btccData.maxPrice = json.getString("high");
+			        btccData.minPrice = json.getString("low");
+			        
+			    } catch (JSONException e) {
+			    	Log.e(TAG, e.toString());
+			    	e.printStackTrace();
+			    }
+			    
+			}catch (Exception e){
+				Log.e(TAG, e.toString());
+				e.printStackTrace();
+			}
+
 		} 
 	}
 	

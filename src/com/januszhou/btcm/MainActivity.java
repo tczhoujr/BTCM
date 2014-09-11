@@ -6,9 +6,11 @@ import java.util.List;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.BaseAdapter;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -46,28 +48,60 @@ public class MainActivity extends Activity {
 		msgReceiver = new MsgReceiver();  
         intentFilter = new IntentFilter();  
         intentFilter.addAction("com.januszhou.btcm.MSG_NEW_PRICE");
-        
-		startService(new Intent(this, UpdateService.class));
-		
+     
 		Log.d("MainActivity", "onCreate");
 	}
 	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// TODO Auto-generated method stub
+		super.onCreateOptionsMenu(menu);
+		getMenuInflater().inflate(R.menu.menu, menu);
+		return true;
+	}
 	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		switch (item.getItemId()){
+			case R.id.action_Prefs:
+				startActivity(new Intent(this, PrefsActivity.class));
+				break;
+			case R.id.action_refresh:
+				Toast.makeText(this, "Refreshing...", Toast.LENGTH_LONG).show();
+				break;
+				
+		}
+		return true;
+	}
+
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
+		 
+		//start service
+		startService(new Intent(this, UpdateService.class));
+		
 		//register service
 		registerReceiver(msgReceiver, intentFilter);  
 	}
 	
-	
+
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();	
+		
+		//stop service
+		stopService(new Intent(this, UpdateService.class));
+	}
 
 	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
-		stopService(new Intent(this, UpdateService.class));
+		
 		unregisterReceiver(msgReceiver);  
 	}
 
@@ -76,7 +110,7 @@ public class MainActivity extends Activity {
 		//ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();  
         listContent.clear();
 		HashMap<String, String> map = null;  
-        for (int i = 0; i < 3; i++) {  
+        for (int i = 0; i < BtcmApplication.MARKET_NUM; i++) {  
             map = new HashMap<String, String>();  
             map.put("name", btcm.getMarketData(i).name);  
             map.put("price", btcm.getMarketData(i).lastestPrice);

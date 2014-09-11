@@ -11,5 +11,10 @@
     <string name="pirceUnit_RMB">RMB</string>
     <string name="pirceUnit_USD">USD</string>
     <string name="initial_price">_ _ _ _</string>
+    <string name="refreshInterval">Refresh Interval(s)</string>
+    <string name="summaryInterval">Time Interval to refresh the price.</string>
+    <string name="titlePrefs">Settings</string>
+    <string name="isRunBackground">Run in background to get lastest price?</string>
+    <string name="titleRefresh">Refresh</string>
 
 </resources>

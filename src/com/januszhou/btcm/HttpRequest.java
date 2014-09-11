@@ -2,8 +2,8 @@ package com.januszhou.btcm;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
 
 
 public class HttpRequest {
@@ -17,7 +17,7 @@ public class HttpRequest {
 	            String urlNameString = url + "?" + param;
 	            URL realUrl = new URL(urlNameString);
 	            // open the connection to url
-	            URLConnection connection = realUrl.openConnection();
+	            HttpURLConnection connection = (HttpURLConnection) realUrl.openConnection();
 	            // set the general attribute 
 	            connection.setRequestProperty("accept", "*/*");
 	            connection.setRequestProperty("connection", "Keep-Alive");

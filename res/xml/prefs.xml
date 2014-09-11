@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+        
+        
+        <PreferenceCategory android:title="Custom" >  
+        	<SwitchPreference android:key="isRunBackground" android:title="Run background" android:summary="@string/isRunBackground" android:disableDependentsState="false"/> 
+   			<EditTextPreference android:title="@string/refreshInterval" android:key="interval" android:summary="@string/summaryInterval" android:dependency="isRunBackground"/>
+   		</PreferenceCategory>  
+        
+		<PreferenceCategory android:title="System" >  
+			<Preference  
+	            android:title="About" >  
+	        </Preference>  
+    	</PreferenceCategory>  
+    </PreferenceScreen>

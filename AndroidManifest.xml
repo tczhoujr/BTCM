@@ -19,7 +19,7 @@
         
         <service 
             android:name="com.januszhou.btcm.UpdateService" />
-    "
+        
         <activity
             android:name="com.januszhou.btcm.MainActivity"
             android:label="@string/app_name" >
@@ -29,6 +29,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
+        <activity 
+            android:name=".PrefsActivity" 
+            android:label="@string/titlePrefs">          
+        </activity>
+        
     </application>
 
 </manifest>

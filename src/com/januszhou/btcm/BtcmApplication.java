@@ -7,7 +7,7 @@ import com.januszhou.btcm.MarketData;
 public class BtcmApplication extends Application{
 	
 	private static final String TAG = BtcmApplication.class.getSimpleName();
-	private static final int MARKET_NUM = 3;
+	public static final int MARKET_NUM = 3;
 	private boolean serviceRunning;
 	private Market market;
 	

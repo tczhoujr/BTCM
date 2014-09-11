@@ -6,9 +6,10 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#e6e6e6"
     android:orientation="vertical" >
     
-    
+ 
     <TextView
         android:id="@+id/titleView"
         android:layout_width="match_parent"
@@ -16,19 +17,23 @@
         android:gravity="center"
         android:textSize="32sp"
         android:textStyle="bold"
-        android:layout_margin="5dp"
+        android:layout_margin="8dp"
         android:text="@string/title" />
-    
+    <!--   
     <View  
 		android:layout_width="fill_parent"  
 	    android:layout_height="1px" 
 		android:background="@android:color/background_dark" />  
-    
+    -->  
     <ListView 
 		android:id="@+id/listView" 
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content" 
-		android:layout_weight="1" 
+		android:layout_weight="1"   
+		android:divider="@android:color/transparent"
+        android:paddingTop="5dp"  
+        android:paddingBottom="5dp"  
+        android:dividerHeight="10dp"
 		android:drawSelectorOnTop="false" />
     
 
